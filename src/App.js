@@ -1,72 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import PostItem from './components/PostItem';
-import PostItemHeader from './components/PostItemHeader';
-import MySelect from './components/MySelect';
+import {Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText } from 'reactstrap'; 
 
 
 
 function App() {
-
-  const [posts, setPosts] = useState([
-    {category: 'Vegetables and legumes/beans', itemName: 'Broccoli', price: 0.25, id:1},
-    {category: 'Fructs', itemName: 'Mango', price: 1.25, id: 2},
-    {category: 'Fructs', itemName: 'Apple', price: 0.50, id: 3},
-    {category: 'Berries', itemName: 'Blueberry', price: 0.75, id: 4}
-  ])
-
-  const [selectedSort, setSelectedSort] = useState('')
-
-
-  const sortPosts = (sort) => { 
-    if (sortPosts.value !== '') {
-      setSelectedSort(sort);
-      console.log(sort);
-      setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
-    }
-  }
-
-
   return (
-    <>
-      <PostItemHeader/>
-      {posts.map(post => 
-        <PostItem post={post} key={post.id}/>  
-      )}
-      <div>
-        <MySelect
-          value={selectedSort}
-          onChange={sortPosts}
-          defaultValue="Select"
-          options={[
-            {value: '', name: 'default'},
-            {value: 'category', name: 'by category'}
-            ]}
-        />
-        <MySelect
-          value={selectedSort}
-          onChange={sortPosts }
-          defaultValue="Select"
-          options={[
-            {value: '', name: 'default'},
-            {value: 'price', name: 'by price'},
-            ]}
-        />
-      </div>
-      
-    </>
-  );
+    <div>
+  <Navbar
+    color="light"
+    expand="md"
+    light
+  >
+    <NavbarBrand href="/">
+      React App
+    </NavbarBrand>
+    <NavbarToggler onClick={function noRefCheck(){}} />
+    <Collapse navbar>
+      <Nav
+        className="me-auto"
+        navbar
+      >
+        <NavItem>
+          <NavLink href="/listall">
+            List of all products
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/addedlist">
+            List of added products
+          </NavLink>
+        </NavItem>
+      </Nav>
+    </Collapse>
+  </Navbar>
+</div>
+  )
 }
 
 export default App;
 
-
-// {/* <PostItem category={'Vegetables and legumes/beans'} itemName={'Broccoli'} price={0.25} />
-//       <PostItem category={'Fructs'} itemName={'Mango'} price={1.25} />
-//       <PostItem category={'Fructs'} itemName={'Apple'} price={0.50} />
-//       <PostItem category={'Berries'} itemName={'Blueberry'} price={0.75} /> */}
-
-
-/* /* {posts.map(post => 
-        <PostItem post={post}/>
-      )} */ 
